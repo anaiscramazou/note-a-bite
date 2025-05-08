@@ -1,9 +1,17 @@
 // Helper to show a specific screen
 function showScreen(screenId) {
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => screen.style.display = 'none');
-    document.getElementById(screenId).style.display = 'block';
-  }
+    // Hide all screens
+    const screens = document.querySelectorAll(".screen");
+    screens.forEach(screen => screen.style.display = "none");
+
+    // Show selected screen
+    const target = document.getElementById(screenId);
+    if (target) {
+        target.style.display = "block";
+    } else {
+        console.warn("Screen not found: " + screenId);
+    }
+}
   
   // Accordion toggle
   function toggleAccordion(id) {
