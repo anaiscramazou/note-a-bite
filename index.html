@@ -14,8 +14,10 @@
   <main id="app">
     <!-- Screen 0: Start -->
     <section class="screen" id="start-screen">
-        <h1>Note-a-Bite</h1>
-        <button onclick="showScreen('home-screen')">New Recipe</button>
+        <div class="start-cover">
+            <h1>Note-a-Bite</h1>
+            <button onclick="showScreen('home-screen')">New Recipe</button>
+        </div>
     </section>
     
     <!-- Screen 1: Home -->
@@ -30,16 +32,26 @@
                 <!-- Recipe Name -->
                 <div class="input-section">
                   <label for="recipe-name"><h2>Recipe Name</h2></label>
-                  <input type="text" class="recipe-name" placeholder="Name ..." />
+                  <input type="text" id="recipe-name" class="recipe-name" placeholder="Name ..." />
+
+                  <!-- Confirmation & Edit Buttons -->
+                  <div class="name-buttons">
+                    <button onclick="confirmRecipeName()" id="confirm-btn">Confirm</button>
+                    <button onclick="editRecipeName()" id="edit-btn" style="display: none;">Edit</button>
+                  </div>
                 </div>
             
                 <!-- Ingredients Section -->
                 <div class="input-section" onclick="toggleAccordion('ingredient-inputs')">
                   <div class="section-header">
-                    <label><h2>Ingredients</h2></label>
+                    <label>
+                        <span onclick="navigateToIngredients()">
+                          <h2>Ingredients</h2>
+                        </span>
+                    </label>
                     <div class="section-header-details">
                         <span class="ingredient-count">0</span>
-                        <span class="chevron">›</span>
+                        <span class="chevron" onclick="toggleAccordion('ingredient-inputs', this)"><h2>›</h2></span>
                     </div>
                   </div>
                   <ul class="accordion-content" id="ingredient-inputs"></ul>
@@ -47,11 +59,17 @@
             
                 <!-- Steps Section -->
                 <div class="input-section" onclick="toggleAccordion('step-inputs')">
-                  <div class="section-header">
-                    <label><h2>Steps</h2></label>
-                    <span class="step-count">0</span>
-                    <span class="chevron">›</span>
-                  </div>
+                    <div class="section-header">
+                      <label>
+                        <span onclick="navigateToSteps()">
+                          <h2>Steps</h2>
+                        </span>
+                      </label>
+                      <div class="section-header-details">
+                        <span class="steps-count">0</span>
+                        <span class="chevron" onclick="toggleAccordion('step-inputs', this)"><h2>›</h2></span>
+                      </div>
+                    </div>
                   <ol class="accordion-content" id="step-inputs"></ol>
                 </div>
             
@@ -100,8 +118,7 @@
 
         <!-- Bottom Navigation -->
         <div class="nav-buttons">
-            <button onclick="goBack()">← Back</button>
-            <button onclick="goNext()">Next →</button>
+            <button onclick="goHome()">← Back</button>
         </div>
     </section>
 
@@ -124,15 +141,14 @@
                 
                 <!-- Add Step Button -->
                 <div class="add-button-container">
-                    <button onclick="addIngredient()">+ Add Step ✮⋆˙</button>
+                    <button onclick="addStep()">+ Add Step ✮⋆˙</button>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Navigation -->
         <div class="nav-buttons">
-            <button onclick="goBack()">← Back</button>
-            <button onclick="goNext()">Next →</button>
+            <button onclick="goHome()">← Back</button>
         </div>
         
     </section>
