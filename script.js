@@ -13,110 +13,184 @@ function showScreen(screenId) {
     }
 }
 
-// Recipe Name
-    // Wait until the DOM is ready before attaching event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-        const confirmBtn = document.getElementById('confirm-btn');
-        const editBtn = document.getElementById('edit-btn');
-        const recipeNameInput = document.getElementById('recipe-name');
-    
-    function confirmRecipeName() {
-      // Disable the input field and hide the confirm button
-      recipeNameInput.disabled = true;
-      confirmBtn.style.display = 'none';
-      
-      // Show the edit button
-      editBtn.style.display = 'inline-block';
+// HOME SCREEN
+
+    // Recipe Name
+        // Wait until the DOM is ready before attaching event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmBtn = document.getElementById('confirm-btn');
+            const editBtn = document.getElementById('edit-btn');
+            const recipeNameInput = document.getElementById('recipe-name');
+
+        function confirmRecipeName() {
+          // Disable the input field and hide the confirm button
+          recipeNameInput.disabled = true;
+          confirmBtn.style.display = 'none';
+
+          // Show the edit button
+          editBtn.style.display = 'inline-block';
+        }
+
+        function editRecipeName() {
+          // Enable the input field for editing
+          recipeNameInput.disabled = false;
+
+          // Show the confirm button and hide the edit button
+          confirmBtn.style.display = 'inline-block';
+          editBtn.style.display = 'none';
+        }
+
+        // Attach the functions to the buttons
+        confirmBtn.addEventListener('click', confirmRecipeName);
+        editBtn.addEventListener('click', editRecipeName);
+      });
+
+
+    // Accordion toggle
+    function toggleAccordion(id, clickedElement) {
+      const content = document.getElementById(id);
+      const chevron = clickedElement.querySelector('.chevron h2');
+
+      const isExpanded = content.style.display === 'block';
+
+      // Toggle visibility
+      content.style.display = isExpanded ? 'none' : 'block';
+
+      // Toggle chevron rotation class
+      if (chevron) {
+        chevron.classList.toggle('rotated', !isExpanded);
+      }
     }
-  
-    function editRecipeName() {
-      // Enable the input field for editing
-      recipeNameInput.disabled = false;
-      
-      // Show the confirm button and hide the edit button
-      confirmBtn.style.display = 'inline-block';
-      editBtn.style.display = 'none';
+
+    // Utility to update count in accordion
+    function updateCount(id, count) {
+      const counter = document.getElementById(id);
+      if (counter) counter.textContent = count;
     }
-  
-    // Attach the functions to the buttons
-    confirmBtn.addEventListener('click', confirmRecipeName);
-    editBtn.addEventListener('click', editRecipeName);
-  });
 
-// Chevron toggle
-function toggleAccordion(contentId, chevronEl) {
-  const content = document.getElementById(contentId);
-  const isVisible = content.style.display === 'block';
 
-  content.style.display = isVisible ? 'none' : 'block';
+// INGREDIENTS SCREEN
 
-  // Rotate chevron if expanded
-  if (chevronEl) {
-    chevronEl.classList.toggle('rotate', !isVisible);
-  }
+    // Navigate to Ingredients Screen
+    function navigateToIngredients() {
+      // Hide all screens
+      const allScreens = document.querySelectorAll('.screen');
+      allScreens.forEach(screen => screen.style.display = 'none');
+
+      // Show the ingredients screen
+      const ingredientsScreen = document.getElementById('ingredients-screen');
+      ingredientsScreen.style.display = 'block';
+    }
+
+    // Ingredient handling
+    function addIngredient() {
+      const list = document.getElementById('ingredients-list');
+      const div = document.createElement('div');
+      div.className = 'ingredient-item';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'e.g. 1 cup of flour';
+      input.className = 'ingredient-input';
+      
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.textContent = '✕';
+      removeBtn.onclick = function () {
+        const index = Array.from(list.children).indexOf(div);
+        ingredients.splice(index, 1); // Remove from array
+        div.remove();
+        updateCount('ingredient-count', document.querySelectorAll('.ingredient-item').length);
+        updateIngredientList(); // Re-render list
+      };
+
+      input.addEventListener('input', () => {
+        const index = Array.from(list.children).indexOf(div);
+        ingredients[index] = input.value; // Update array with new input
+        updateIngredientList();
+      });
+
+      div.appendChild(input);
+      div.appendChild(removeBtn);
+      list.appendChild(div);
+      
+      // Add to ingredients array
+      ingredients.push(''); // add placeholder
+      updateIngredientList(); // Immediately sync if there's already some input (for when going home)
+      updateCount('ingredient-count', document.querySelectorAll('.ingredient-item').length);
+    }
+
+
+// STEPS SCREEN
+    // Navigate to Steps Screen
+    function navigateToSteps() {
+      // Hide all screens
+      const allScreens = document.querySelectorAll('.screen');
+      allScreens.forEach(screen => screen.style.display = 'none');
+
+      // Show the steps screen
+      const stepsScreen = document.getElementById('steps-screen');
+      stepsScreen.style.display = 'block';
+    }
+
+    // Steps handling
+    function addStep() {
+      const list = document.getElementById('steps-list');
+      const div = document.createElement('div');
+      div.className = 'steps-item';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'e.g. Stir-fry garlic until golden...';
+      input.className = 'step-input';
+      
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.textContent = '✕';
+      removeBtn.onclick = function () {
+        const index = Array.from(list.children).indexOf(div);
+        steps.splice(index, 1); // Remove from array
+        div.remove();
+        updateCount('steps-count', document.querySelectorAll('.steps-item').length);
+        updateStepsList(); // Re-render list
+      };
+
+      input.addEventListener('input', () => {
+        const index = Array.from(list.children).indexOf(div);
+        steps[index] = input.value; // Update array with new input
+        updateStepsList();
+      });
+
+      div.appendChild(input);
+      div.appendChild(removeBtn);
+      list.appendChild(div);
+      
+      // Add to steps array
+      steps.push('');
+      updateCount('steps-count', document.querySelectorAll('.steps-item').length);
+    }
+
+
+// STORING INPUTS
+const ingredients = [];
+const steps = [];
+
+function updateIngredientList() {
+  const list = document.getElementById("ingredient-inputs");
+  const count = document.querySelector(".ingredient-count");
+  list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
+  count.textContent = ingredients.length;
 }
 
-// Navigate to Ingredients Screen
-function navigateToIngredients() {
-  // Hide all screens
-  const allScreens = document.querySelectorAll('.screen');
-  allScreens.forEach(screen => screen.style.display = 'none');
-
-  // Show the ingredients screen
-  const ingredientsScreen = document.getElementById('ingredients-screen');
-  ingredientsScreen.style.display = 'block';
-}
-  
-// Ingredient handling
-function addIngredient() {
-  const list = document.getElementById('ingredients-list');
-  const div = document.createElement('div');
-  div.className = 'ingredient-item';
-  div.innerHTML = `
-    <input type="text" placeholder="e.g. 1 cup of flour" class="ingredient-input" />
-    <button class="remove-btn" onclick="removeIngredient(this)">✕</button>
-  `;
-  list.appendChild(div);
-  updateCount('ingredient-count', list.querySelectorAll('.ingredient-item').length);
+function updateStepsList() {
+  const list = document.getElementById("step-inputs");
+  const count = document.querySelector(".steps-count");
+  list.innerHTML = steps.map((item, index) => `<li>Step ${index + 1}: ${item}</li>`).join("");
+  count.textContent = steps.length;
 }
 
-function removeIngredient(button) {
-  const item = button.parentElement;
-  item.remove();
-  updateCount('ingredient-count', document.querySelectorAll('.ingredient-item').length);
-}
 
-// Navigate to Steps Screen
-function navigateToSteps() {
-  // Hide all screens
-  const allScreens = document.querySelectorAll('.screen');
-  allScreens.forEach(screen => screen.style.display = 'none');
-
-  // Show the steps screen
-  const stepsScreen = document.getElementById('steps-screen');
-  stepsScreen.style.display = 'block';
-}
-  
-// Steps handling
-function addStep() {
-  const list = document.getElementById('steps-list');
-  const div = document.createElement('div');
-  div.className = 'steps-item';
-  div.innerHTML = `
-    <textarea placeholder="e.g. Stir-fry garlic until golden..." class="step-input"></textarea>
-    <button class="remove-btn" onclick="removeStep(this)">✕</button>
-  `;
-  list.appendChild(div);
-  updateCount('step-count', list.querySelectorAll('.steps-item').length);
-}
-
-function removeStep(button) {
-  const item = button.parentElement;
-  item.remove();
-  updateCount('step-count', document.querySelectorAll('.steps-item').length);
-}
-
-// Bottom Navigation
+// BOTTOM NAV
 function goHome(button) {
   // Hide all screens
   const allScreens = document.querySelectorAll('.screen');
@@ -125,13 +199,13 @@ function goHome(button) {
   // Show the home screen
   const homeScreen = document.getElementById('home-screen');
   homeScreen.style.display = 'block';
+
+   // Update the lists when returning home
+  console.log("Ingredients array on return:", ingredients);
+  updateIngredientList();
+  updateStepsList();
 }
   
-// Utility to update count in accordion
-function updateCount(id, count) {
-  const counter = document.getElementById(id);
-  if (counter) counter.textContent = count;
-}
   
 // Image preview
 document.getElementById('preview-image').addEventListener('change', function (e) {
@@ -145,15 +219,10 @@ document.getElementById('preview-image').addEventListener('change', function (e)
   }
 });
 
-// Placeholder for generate button
-function generateRecipe() {
-  alert("✨ Recipe generated! (This can be customized later)");
-}
 
-// Navigation (optional, for multi-screen flow)
-function goBack() {
-  // Implement logic to go to the previous screen
-  alert("Go back logic");
+// BUTTONS
+function generateRecipe() {
+  alert("✨ Recipe generated!");
 }
 
 function goNext() {
