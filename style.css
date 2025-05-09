@@ -45,8 +45,8 @@ body {
   
   .screen {
     display: none;
-    width: 982px;
-    height: 600px;
+    width: 680px;
+    height: 800px;
     align-items: center;
   }
     
@@ -55,6 +55,11 @@ body {
   }
   
   .start-cover {
+    display: flex;
+    width: 600px;
+    height: 320px;
+    justify-content: center;
+    align-items: center;
     background-image: url('Cover.png');
     background-size: contain;
     background-repeat: no-repeat;
