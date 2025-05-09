@@ -246,7 +246,7 @@ body {
   #ingredients-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 26px;
     flex: 1 0 0;
     align-self: stretch;
