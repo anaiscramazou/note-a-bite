@@ -238,6 +238,14 @@ body {
     justify-content: center;
   }
 
+  #ingredients-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 26px;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
   
   
   
