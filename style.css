@@ -1,7 +1,7 @@
 body {
     display: flex;
-    width: 982px;
-    height: 1400px;
+    width: 680px;
+    height: 800px;
     align-self: stretch;
     padding: 16px;
     flex-direction: column;
