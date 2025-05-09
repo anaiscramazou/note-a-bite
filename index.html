@@ -42,52 +42,50 @@
                 </div>
             
                 <!-- Ingredients Section -->
-                <div class="input-section" onclick="toggleAccordion('ingredient-inputs')">
+                <div class="input-section">
                   <div class="section-header">
-                    <label>
-                        <span onclick="navigateToIngredients()">
-                          <h2>Ingredients</h2>
-                        </span>
-                    </label>
-                    <div class="section-header-details">
-                        <span class="ingredient-count">0</span>
-                        <span class="chevron" onclick="toggleAccordion('ingredient-inputs', this)"><h2>›</h2></span>
+                    <h2 class="section-title" onclick="navigateToIngredients()">Ingredients</h2>
+                    <div class="section-header-details" onclick="toggleAccordion('ingredient-inputs', this)">
+                        <div class="ingredient-count">0</div>
+                        <div class="chevron">
+                          <h2 style="width: 48px; height: 48px">›</h2>
+                        </div>
                     </div>
                   </div>
-                  <ul class="accordion-content" id="ingredient-inputs"></ul>
+                  <ul class="accordion-content" id="ingredient-inputs" style="display: none;"></ul>
                 </div>
             
                 <!-- Steps Section -->
-                <div class="input-section" onclick="toggleAccordion('step-inputs')">
-                    <div class="section-header">
-                      <label>
-                        <span onclick="navigateToSteps()">
-                          <h2>Steps</h2>
-                        </span>
-                      </label>
-                      <div class="section-header-details">
-                        <span class="steps-count">0</span>
-                        <span class="chevron" onclick="toggleAccordion('step-inputs', this)"><h2>›</h2></span>
+                <div class="input-section">
+                  <div class="section-header">
+                    <h2 class="section-title" onclick="navigateToSteps()">Steps</h2>
+                    <div class="section-header-details" onclick="toggleAccordion('step-inputs', this)">
+                      <div class="steps-count">0</div>
+                      <div class="chevron">
+                        <h2 style="width: 48px; height: 48px">›</h2>
                       </div>
                     </div>
-                  <ol class="accordion-content" id="step-inputs"></ol>
+                  </div>
+                  <ul class="accordion-content" id="step-inputs" style="display: none;"></ul>
                 </div>
             
                 <!-- Upload Image -->
-                <div class="image-upload">
-                    <div class="upload-button">
-                        <label for="image-upload"><h2>Upload an Image</h2></label>
+                </div class="image-frame">
+                    <div class="image-upload">
+                        <div class="upload-button">
+                            <h2>Upload an Image</h2>
+                        </div>
+                        <input type="file" id="preview-image" accept="image/*" hidden />
+                        <img class="preview-image" src="#" alt="Preview" />
                     </div>
-                    <input type="file" id="preview-image" accept="image/*" hidden />
-                    <img class="preview-image" src="" alt="Preview" />
                 </div>
             </div>
         </div>
       
         <!-- Generate Button -->
         <div class="button-container">
-            <div class="generate-button">
-                <button onclick="generateRecipe()">GENERATE !!!</button>
+            <div class="generate-button" onclick="generateRecipe()">
+                <h2 style="color: #F2F2E5">GENERATE !!!</h2>
             </div>
         </div>
       </section>
@@ -104,7 +102,7 @@
                 <div id="ingredients-list">
                     <!-- Example input -->
                     <div class="ingredient-item">
-                        <input type="text" placeholder="e.g. 1 cup of flour" class="ingredient-input" />
+                        <input type="text" placeholder="e.g. 1 cup of flour" id="ingredient-input-field" />
                         <button class="remove-btn" onclick="removeIngredient(this)">✕</button>
                     </div>
                 </div>
@@ -134,7 +132,7 @@
                 <div id="steps-list">
                     <!-- Example input -->
                     <div class="steps-item">
-                        <textarea placeholder="e.g. Stir-fry garlic until golden..." class="step-input"></textarea>
+                        <textarea placeholder="e.g. Stir-fry garlic until golden..." id="step-input-field"></textarea>
                         <button class="remove-btn" onclick="removeStep(this)">✕</button>
                     </div>
                 </div>
@@ -193,18 +191,18 @@
 
                 <!-- Image and QR -->
                 <div class="image-qr-row">
-                    <img id="preview-image-uploaded" src="" alt="Uploaded Dish"/>
+                    <img id="preview-image-uploaded" src="#" alt="Uploaded Dish"/>
                     <div id="qr-code" class="qr-box"></div>
                 </div>
             </div>
         </div>
       
         <button onclick="showScreen('home-screen')">New Recipe</button>
-    </section>
-
-  </main>
+    </div>
+  </section>
 
   <script src="qr-code-lib/qrcode.min.js"></script>
   <script src="script.js"></script>
+  </main>
 </body>
 </html>
