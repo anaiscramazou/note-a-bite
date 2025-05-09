@@ -222,8 +222,8 @@ body {
   
   #ingredients-card {
     display: flex;
-    width: 600px;
-    height: 856px;
+    width: 480px;
+    height: 600px;
     padding: 24px 40px;
     flex-direction: column;
     align-items: flex-start;
