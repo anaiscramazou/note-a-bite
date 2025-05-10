@@ -46,6 +46,7 @@ body {
   .screen {
     display: none;
     align-items: center;
+    width: 680px;
   }
     
   #start-screen {
@@ -54,7 +55,7 @@ body {
   
   .start-cover {
     display: flex;
-    width: 600px;
+    width: 680px;
     height: 320px;
     justify-content: center;
     align-items: center;
