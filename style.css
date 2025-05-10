@@ -267,6 +267,7 @@ body {
   
   .nav-buttons {
     display: flex;
+    width: 100%;
     padding-top: 24px;
     flex-direction: column;
     justify-content: center;
