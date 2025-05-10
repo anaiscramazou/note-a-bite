@@ -30,16 +30,19 @@
         <div class="body">
             <div class="form-group">
                 <!-- Recipe Name -->
-                <div class="input-section">
-                  <label for="recipe-name"><h2>Recipe Name</h2></label>
-                  <input type="text" id="recipe-name" class="recipe-name" placeholder="Name ..." />
-
-                  <!-- Confirmation & Edit Buttons -->
-                  <div class="name-buttons">
-                    <button onclick="confirmRecipeName()" id="confirm-btn">Confirm</button>
-                    <button onclick="editRecipeName()" id="edit-btn" style="display: none;">Edit</button>
-                  </div>
+                <div class="namecard">
+                    <div class="input-section">
+                        <label for="recipe-name"><h2>Recipe Name</h2></label>
+                        <input type="text" id="recipe-name" class="recipe-name" placeholder="Name ..." />
+    
+                        <!-- Confirmation & Edit Buttons -->
+                        <div class="name-buttons">
+                            <button onclick="confirmRecipeName()" id="confirm-btn">Confirm</button>
+                            <button onclick="editRecipeName()" id="edit-btn" style="display: none;">Edit</button>
+                        </div>
+                    </div>
                 </div>
+
             
                 <!-- Ingredients Section -->
                 <div class="input-section">
