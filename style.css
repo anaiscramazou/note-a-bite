@@ -28,6 +28,16 @@ body {
     text-transform: uppercase;
     color: #CBA623;
   }
+
+  h3 {
+    font-family: Arial Narrow, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    text-transform: uppercase;
+    color: #CBA623;
+  }
   
   p {
     font-family: Arial Narrow, sans-serif;
@@ -166,6 +176,9 @@ body {
   }
   
   .image-frame {
+    display: flex;
+    width: 400px;
+    height: 300px;
     background-image: url('Upload.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -185,9 +198,9 @@ body {
     align-self: stretch;
   }
   
-  .upload-button {
+  .uploadimg-button {
     display: inline-flex;
-    padding: 8px;
+    padding: 8px 16px;
     justify-content: center;
     align-items: center;
     gap: 8px;
@@ -224,6 +237,14 @@ body {
   
   /* Write Ingredients Screen */
   
+  #ingredients-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+  }
+
   #ingredients-card {
     display: flex;
     width: 480px;
