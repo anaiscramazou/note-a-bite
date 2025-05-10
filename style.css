@@ -236,14 +236,6 @@ body {
   
   
   /* Write Ingredients Screen */
-  
-  #ingredients-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 80px;
-  }
 
   #ingredients-card {
     display: flex;
@@ -273,5 +265,14 @@ body {
     align-self: stretch;
   }
   
+  .nav-buttons {
+    display: flex;
+    padding-top: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+  }
   
   
