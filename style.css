@@ -239,7 +239,7 @@ body {
 
   #ingredients-card {
     display: flex;
-    width: 480px;
+    width: 100%;
     height: 600px;
     padding: 24px 40px;
     flex-direction: column;
