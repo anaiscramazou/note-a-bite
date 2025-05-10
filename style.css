@@ -268,9 +268,7 @@ body {
   .nav-buttons {
     display: flex;
     padding-top: 24px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: start;
+    align-items: center;
     gap: 8px;
     align-self: stretch;
   }
