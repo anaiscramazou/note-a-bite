@@ -114,6 +114,14 @@ document.addEventListener("DOMContentLoaded", function () {
         updateIngredientList();
       });
 
+    // Enable Enter key to add another ingredient
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault(); // prevent form submission or new line
+          addIngredient();
+        }
+      });
+
       div.appendChild(input);
       div.appendChild(removeBtn);
       list.appendChild(div);
