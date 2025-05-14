@@ -13,6 +13,10 @@ function showScreen(screenId) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    showScreen('start-screen');
+});
+
 // HOME SCREEN
 
     // Recipe Name
