@@ -104,6 +104,20 @@ function showScreen(screenId) {
         updateIngredientList(); // Re-render list
       };
 
+      // Enable Enter key to add another ingredient
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault(); // prevent form submission or new line
+          addIngredient();
+        }
+      });
+
+      item.appendChild(input);
+      item.appendChild(removeBtn);
+      ingredientsList.appendChild(item);
+      
+      input.focus(); // auto-focus new input
+
       input.addEventListener('input', () => {
         const index = Array.from(list.children).indexOf(div);
         ingredients[index] = input.value; // Update array with new input
