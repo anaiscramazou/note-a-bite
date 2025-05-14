@@ -71,6 +71,9 @@ function showScreen(screenId) {
 
 // INGREDIENTS SCREEN
 
+    // Declare global ingredients array
+    let ingredients = [];
+    
     // Navigate to Ingredients Screen
     function navigateToIngredients() {
       // Hide all screens
@@ -92,7 +95,7 @@ function showScreen(screenId) {
       input.type = 'text';
       input.placeholder = 'e.g. 1 cup of flour';
       input.className = 'ingredient-input';
-      
+
       const removeBtn = document.createElement('button');
       removeBtn.className = 'remove-btn';
       removeBtn.textContent = '✕';
@@ -112,12 +115,6 @@ function showScreen(screenId) {
         }
       });
 
-      item.appendChild(input);
-      item.appendChild(removeBtn);
-      ingredientsList.appendChild(item);
-      
-      input.focus(); // auto-focus new input
-
       input.addEventListener('input', () => {
         const index = Array.from(list.children).indexOf(div);
         ingredients[index] = input.value; // Update array with new input
@@ -127,10 +124,10 @@ function showScreen(screenId) {
       div.appendChild(input);
       div.appendChild(removeBtn);
       list.appendChild(div);
-      
-      // Add to ingredients array
-      ingredients.push(''); // add placeholder
-      updateIngredientList(); // Immediately sync if there's already some input (for when going home)
+
+      ingredients.push(''); // Add placeholder
+      input.focus(); // Auto-focus new input
+      updateIngredientList(); // Sync immediately
       updateCount('ingredient-count', document.querySelectorAll('.ingredient-item').length);
     }
 
