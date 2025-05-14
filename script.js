@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       input.type = 'text';
       input.placeholder = 'e.g. 1 cup of flour';
       input.className = 'ingredient-input';
-
+      
       const removeBtn = document.createElement('button');
       removeBtn.className = 'remove-btn';
       removeBtn.textContent = '✕';
@@ -108,14 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateIngredientList(); // Re-render list
       };
 
-      // Enable Enter key to add another ingredient
-      input.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault(); // prevent form submission or new line
-          addIngredient();
-        }
-      });
-
       input.addEventListener('input', () => {
         const index = Array.from(list.children).indexOf(div);
         ingredients[index] = input.value; // Update array with new input
@@ -125,12 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
       div.appendChild(input);
       div.appendChild(removeBtn);
       list.appendChild(div);
-
-      ingredients.push(''); // Add placeholder
-      input.focus(); // Auto-focus new input
-      updateIngredientList(); // Sync immediately
+      
+      // Add to ingredients array
+      ingredients.push(''); // add placeholder
+      updateIngredientList(); // Immediately sync if there's already some input (for when going home)
       updateCount('ingredient-count', document.querySelectorAll('.ingredient-item').length);
     }
+
 
 
 // STEPS SCREEN
