@@ -71,9 +71,6 @@ function showScreen(screenId) {
 
 // INGREDIENTS SCREEN
 
-    // Declare global ingredients array
-    let ingredients = [];
-    
     // Navigate to Ingredients Screen
     function navigateToIngredients() {
       // Hide all screens
