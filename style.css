@@ -246,6 +246,8 @@ body {
 
   #ingredients-card {
     display: flex;
+    width: 680px;
+    height: 600px;
     padding: 24px 40px;
     flex-direction: column;
     align-items: flex-start;
@@ -291,6 +293,8 @@ body {
   
   #steps-card {
     display: flex;
+    width: 680px;
+    height: 600px;
     padding: 24px 40px;
     flex-direction: column;
     align-items: flex-start;
