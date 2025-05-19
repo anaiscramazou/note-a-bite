@@ -186,7 +186,6 @@ body {
     display: flex;
     width: 400px;
     height: 300px;
-    padding: 56px;
     background-image: url('Upload.png');
     background-size: contain;
     background-repeat: no-repeat;
