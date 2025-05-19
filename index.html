@@ -74,10 +74,30 @@
             
                 <!-- Upload Image -->
                 <div class="image-frame">
-                    <div class="image-upload">
-                        <button onclick="document.getElementById('preview-image').click()">Upload an Image⋆｡‧˚ʚɞ˚‧｡⋆</button>
+                    <div class="image-upload" style="position: relative;">
+                        <button onclick="document.getElementById('preview-image').click()" style="position: relative; z-index: 2;">
+                        Upload an Image⋆｡‧˚ʚɞ˚‧｡⋆
+                        </button>
                         <input type="file" id="preview-image" accept="image/*" hidden />
-                        <img id="image-preview" class="preview-image" src="#" alt="Preview" style="display: none;" />
+                        
+                        <!-- Uploaded image preview -->
+                        <img
+                        id="image-preview"
+                        class="preview-image"
+                        src="#"
+                        alt="Preview"
+                        style="
+                            width: 280px;
+                            height: 184px;
+                            object-fit: cover;
+                            position: absolute;
+                            top: 40px; /* adjust to push it below the button */
+                            left: 0;
+                            z-index: 1;
+                            display: none;
+                            border-radius: 10px;
+                        "
+                        />
                     </div>
                 </div>
             </div>
