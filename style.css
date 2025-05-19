@@ -202,6 +202,10 @@ body {
   }
   
   .uploadimg-button {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     right: 86px;
     top: 126px;
