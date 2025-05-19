@@ -72,6 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
       if (counter) counter.textContent = count;
     }
 
+    // Upload Image Button
+    document.getElementById('preview-image').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const img = document.getElementById('image-preview');
+          img.src = e.target.result;
+          img.style.display = 'block'; // show the image
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+
 
 // INGREDIENTS SCREEN
 
@@ -114,13 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
         updateIngredientList();
       });
 
-    // Enable Enter key to add another ingredient
+      // Enable Enter key to add another ingredient
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault(); // prevent form submission or new line
           addIngredient();
         }
       });
+
 
       div.appendChild(input);
       div.appendChild(removeBtn);
