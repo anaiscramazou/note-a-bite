@@ -199,8 +199,6 @@ body {
     width: 288px;
     height: 188px;
     position: absolute;
-    left: 56px;
-    top: 56px;
     object-fit: cover;
     z-index: 1;
     display: none;
