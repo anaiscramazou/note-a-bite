@@ -201,19 +201,11 @@ body {
     align-self: stretch;
   }
   
-  .uploadimg-button {
-    display: flex;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 86px;
-    top: 126px;
-    z-index: 2;
-  }
-  
   #image-preview {
-    align-self: stretch;
+    width: 288px;
+    height: 188px;
+    left: 56px;
+    top: 56px;
     object-fit: cover;
     z-index: 1;
     display: none;
