@@ -195,15 +195,14 @@ body {
   }
   
   #image-preview {
-    width: 288px;
-    height: 188px;
+    width: 200px;
+    height: 120px;
     position: absolute;
     top: 50%;
     left: 50%;
     object-fit: cover;
     z-index: 1;
-    display: none;
-    border-radius: 10px;
+    border-radius: 12px;
   }
   
   .button-container {
