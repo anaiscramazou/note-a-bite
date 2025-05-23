@@ -200,7 +200,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    object-fit: cover;
+    background-size: contain;
     z-index: 1;
     border-radius: 12px;
   }
