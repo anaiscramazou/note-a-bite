@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Note-a-Bite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#CBA623" />
+</head>
+
+<body>
+  <main id="app">
+    <!-- Screen 0: Start -->
+    <section class="screen" id="start-screen">
+        <div class="start-cover">
+            <h1>Note-a-Bite</h1>
+            <button onclick="showScreen('home-screen')">New Recipe</button>
+        </div>
+    </section>
+    
+    <!-- Screen 1: Home -->
+    <section class="screen" id="home-screen">
+        <div class="header">
+            <h1>Write Your Recipe</h1>
+            <p>°❀⋆.ೃ࿔*:･</p>
+        </div>
+
+        <div class="body">
+            <div class="form-group">
+                <!-- Recipe Name -->
+                <div class="namecard">
+                    <div class="input-section">
+                        <label for="recipe-name"><h2>Recipe Name</h2></label>
+                        <input type="text" id="recipe-name" class="recipe-name" placeholder="Name ..." />
+    
+                        <!-- Confirmation & Edit Buttons -->
+                        <div class="name-buttons">
+                            <button onclick="confirmRecipeName()" id="confirm-btn">Confirm</button>
+                            <button onclick="editRecipeName()" id="edit-btn" style="display: none;">Edit</button>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <!-- Ingredients Section -->
+                <div class="input-section">
+                  <div class="section-header">
+                    <h2 class="section-title" onclick="navigateToIngredients()">❀Ingredients❀</h2>
+                    <div class="section-header-details" onclick="toggleAccordion('ingredient-inputs', this)">
+                        <div class="ingredient-count">0</div>
+                        <div class="chevron">
+                          <h2 style="width: 48px; height: 48px">›</h2>
+                        </div>
+                    </div>
+                  </div>
+                  <ul class="accordion-content" id="ingredient-inputs" style="display: none;"></ul>
+                </div>
+            
+                <!-- Steps Section -->
+                <div class="input-section">
+                  <div class="section-header">
+                    <h2 class="section-title" onclick="navigateToSteps()">❀Steps❀</h2>
+                    <div class="section-header-details" onclick="toggleAccordion('step-inputs', this)">
+                      <div class="steps-count">0</div>
+                      <div class="chevron">
+                        <h2 style="width: 48px; height: 48px">›</h2>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="accordion-content" id="step-inputs" style="display: none;"></ul>
+                </div>
+            
+                <!-- Upload Image -->
+                <div class="image-frame">
+                    <div style="position: relative; align-self: stretch;">
+                        <button onclick="document.getElementById('preview-image').click()" style="position: absolute; top: 50%; left: 50%; z-index: 2;">
+                        Upload an Image⋆｡‧˚ʚɞ˚‧｡⋆
+                        </button>
+                        <input type="file" id="preview-image" accept="image/*" hidden />
+                        
+                        <!-- Uploaded image preview -->
+                        <img id="image-preview" src="#" alt="Preview"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <!-- Generate Button -->
+        <div class="button-container">
+            <div class="generate-button" onclick="generateRecipe()">
+                <h2 style="color: #F2F2E5">GENERATE !!!</h2>
+            </div>
+        </div>
+      </section>
+    
+    <!-- Screen 2: Write Ingredients -->
+    <section class="screen" id="ingredients-screen">
+        
+        <!-- Ingredients Card -->
+        <div class="body">
+            <div id="ingredients-card">
+                <h2>Ingredients</h2>
+                
+                <!-- Ingredient Input List -->
+                <div id="ingredients-list">
+                    <!-- Example input -->
+                    <div class="ingredient-item">
+                        <input type="text" placeholder="e.g. 1 cup of flour" id="ingredient-input-field" />
+                        <button class="remove-btn" onclick="removeIngredient(this)">✕</button>
+                    </div>
+                </div>
+                
+                <!-- Add More Button -->
+                <div class="add-button-container">
+                    <button onclick="addIngredient()">+ Add Ingredient ✮⋆˙</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="nav-buttons">
+            <button onclick="goHome()">← Back to Home</button>
+        </div>
+    </section>
+
+    <!-- Screen 3: Write Steps -->
+    <section class="screen" id="steps-screen">
+        
+        <!-- Steps Card -->
+        <div class="body">
+            <div id="steps-card">
+                <h2>Steps</h2>
+                
+                <!-- Steps Input List -->
+                <div id="steps-list">
+                    <!-- Example input -->
+                    <div class="steps-item">
+                        <textarea placeholder="e.g. Stir-fry garlic until golden..." id="step-input-field"></textarea>
+                        <button class="remove-btn" onclick="removeStep(this)">✕</button>
+                    </div>
+                </div>
+                
+                <!-- Add Step Button -->
+                <div class="add-button-container">
+                    <button onclick="addStep()">+ Add Step ✮⋆˙</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="nav-buttons">
+            <button onclick="goHome()">← Back</button>
+        </div>
+        
+    </section>
+
+    <!-- Screen 3: Share Recipe -->
+    <section class="screen" id="share-screen">
+        <div class="header">
+            <h1>Share Your Recipe</h1>
+            <p>(*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ</p>
+        </div>
+      
+        <div class="body">
+            <div class="share-recipe">
+                <!-- Recipe Name -->
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2>Recipe Name</h2>
+                        <p class="recipe-name" placeholder="Name ..."></p>
+                    </div>
+                </div>
+            
+                <!-- Ingredients -->
+                <div class="share-row collapsible" onclick="toggleSection('ingredients')">
+                    <div class="section-header">
+                        <label><h2>Ingredients</h2></label>
+                        <div class="section-header-details">
+                            <span id="ingredient-count">0</span>
+                            <span class="chevron">›</span>
+                        </div>
+                    </div>
+                    <ul class="collapsible-content ingredients-list"></ul>
+
+                <!-- Steps -->
+                <div class="share-row collapsible" onclick="toggleSection('steps')">
+                    <div class="section-header">
+                        <label><h2>Steps</h2></label>
+                        <span id="step-count">0</span>
+                        <span class="chevron">›</span>
+                    </div>
+                </div>
+                <ol class="collapsible-content steps-list"></ol>
+
+                <!-- Image and QR -->
+                <div class="image-qr-row">
+                    <img id="preview-image-uploaded" src="#" alt="Uploaded Dish"/>
+                    <div id="qr-code" class="qr-box"></div>
+                </div>
+            </div>
+        </div>
+      
+        <button onclick="showScreen('home-screen')">New Recipe</button>
+    </div>
+  </section>
+
+  <script src="qr-code-lib/qrcode.min.js"></script>
+  <script src="script.js"></script>
+  </main>
+</body>
+</html>
