@@ -74,19 +74,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Upload Image Button
     document.getElementById('preview-image').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
 
-        reader.onload = function (e) {
-          const img = document.getElementById('image-preview');
-          img.src = e.target.result;
-          img.style.display = 'block'; // show the image
-        };
+    reader.onload = function (e) {
+      const img = document.getElementById('image-preview');
+      img.src = e.target.result;
+      img.style.display = 'block'; // show image only after upload
+    };
 
-        reader.readAsDataURL(file);
-      }
-    });
+    reader.readAsDataURL(file);
+  }
+});
 
 
 // INGREDIENTS SCREEN
