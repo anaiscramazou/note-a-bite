@@ -15,6 +15,16 @@ function showScreen(screenId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     showScreen('start-screen');
+
+    // Attach click handler to start button safely
+    const newRecipeBtn = document.getElementById('new-recipe-btn');
+    if (newRecipeBtn) {
+        newRecipeBtn.addEventListener('click', () => {
+            showScreen('home-screen');
+        });
+    }
+
+    // Your confirm/edit recipe logic (keep as-is, or extract it out of this block if you want to use inline onclicks)
 });
 
 // HOME SCREEN
