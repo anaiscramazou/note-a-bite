@@ -2,7 +2,7 @@
 // script.js
 // ---------------------------------------------------
 
-// Show exactly one screen (by ID), hiding all others
+// -------------- Show exactly one screen --------------
 function showScreen(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => {
@@ -21,12 +21,11 @@ function showScreen(screenId) {
 const ingredients = [];
 const steps = [];
 
-// -------------- Home Screen / Recipe Name --------------
+// -------------- Home Screen / Recipe Name Logic --------------
 function confirmRecipeName() {
   const input = document.getElementById('recipe-name');
   const confirmBtn = document.getElementById('confirm-btn');
   const editBtn = document.getElementById('edit-btn');
-
   if (!input || !confirmBtn || !editBtn) return;
 
   input.disabled = true;
@@ -38,7 +37,6 @@ function editRecipeName() {
   const input = document.getElementById('recipe-name');
   const confirmBtn = document.getElementById('confirm-btn');
   const editBtn = document.getElementById('edit-btn');
-
   if (!input || !confirmBtn || !editBtn) return;
 
   input.disabled = false;
@@ -49,12 +47,11 @@ function editRecipeName() {
 // -------------- Accordion (Home Screen counters) --------------
 function toggleAccordion(id, clickedElement) {
   const content = document.getElementById(id);
-  const chevron = clickedElement.querySelector('.chevron h2');
   if (!content) return;
 
+  const chevron = clickedElement.querySelector('.chevron h2');
   const isExpanded = content.style.display === 'block';
   content.style.display = isExpanded ? 'none' : 'block';
-
   if (chevron) {
     chevron.classList.toggle('rotated', !isExpanded);
   }
@@ -66,7 +63,6 @@ function updateIngredientList() {
   const count = document.querySelector(".ingredient-count");
   if (!list || !count) return;
 
-  // Show each ingredient in the accordion list on Home screen
   list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
   count.textContent = ingredients.length;
 }
@@ -88,18 +84,21 @@ function addIngredient() {
   removeBtn.textContent = '✕';
   removeBtn.onclick = function () {
     const index = Array.from(list.children).indexOf(div);
-    ingredients.splice(index, 1);
-    div.remove();
-    updateIngredientList();
+    if (index > -1) {
+      ingredients.splice(index, 1);
+      div.remove();
+      updateIngredientList();
+    }
   };
 
   input.addEventListener('input', () => {
     const index = Array.from(list.children).indexOf(div);
-    ingredients[index] = input.value;
-    updateIngredientList();
+    if (index > -1) {
+      ingredients[index] = input.value;
+      updateIngredientList();
+    }
   });
 
-  // Pressing Enter while focused on an ingredient input adds a new one
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -144,15 +143,19 @@ function addStep() {
   removeBtn.textContent = '✕';
   removeBtn.onclick = function () {
     const index = Array.from(list.children).indexOf(div);
-    steps.splice(index, 1);
-    div.remove();
-    updateStepsList();
+    if (index > -1) {
+      steps.splice(index, 1);
+      div.remove();
+      updateStepsList();
+    }
   };
 
   input.addEventListener('input', () => {
     const index = Array.from(list.children).indexOf(div);
-    steps[index] = input.value;
-    updateStepsList();
+    if (index > -1) {
+      steps[index] = input.value;
+      updateStepsList();
+    }
   });
 
   div.appendChild(input);
@@ -188,7 +191,7 @@ function handleImageUpload(event) {
     const img = document.getElementById('image-preview');
     if (img) {
       img.src = e.target.result;
-      img.style.display = 'block'; // ensure it’s visible once loaded
+      img.style.display = 'block'; // make sure it’s visible
     }
   };
   reader.readAsDataURL(file);
@@ -200,16 +203,18 @@ function generateRecipe() {
 }
 
 // ---------------------------------------------------
-// Bind everything once DOM is ready
+// Bind everything once the DOM is ready
 // ---------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // 1) Show the Start screen first
+  // 1) Always start by showing the Start screen
   showScreen('start-screen');
 
   // 2) “New Recipe” button on the Start screen
   const newBtn = document.getElementById('start-new-recipe');
   if (newBtn) {
+    console.log("🚀 Found start-new-recipe button, binding click listener");
     newBtn.addEventListener('click', () => {
+      console.log("🖱 start-new-recipe clicked—showing home-screen");
       showScreen('home-screen');
     });
   } else {
@@ -232,14 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     imageInput.addEventListener('change', handleImageUpload);
   }
 
-  // 5) Ingredients screen: “+ Add Ingredient” is inline onclick="addIngredient()"
-  //    Steps screen: “+ Add Step” is inline onclick="addStep()"
-  //    Home screen: Ingredients section-title calls navigateToIngredients() inline
-
-  // 6) Back buttons on Ingredients & Steps screens all call goHome() inline
-  //    (no need to re-bind here if they use onclick="goHome()")
-
-  // 7) Share screen’s “New Recipe” uses onclick="showScreen('home-screen')", so that works as-is.
+  // (Remaining “Add Ingredient”, “Add Step”, “Back” and “Ingredients/Steps” are inline in HTML)
 });
 
 // ---------------------------------------------------

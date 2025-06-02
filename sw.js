@@ -1,6 +1,5 @@
-// Change this whenever you make a new release
-const cacheName = 'recipe-gen-v2';
-
+// sw.js
+const cacheName = 'recipe-gen-v2'; // ← Increment this version
 const assets = [
   './',
   './index.html',
@@ -17,8 +16,8 @@ self.addEventListener('install', event => {
   );
 });
 
-// Clean up old caches on activation
 self.addEventListener('activate', event => {
+  // Remove old caches
   event.waitUntil(
     caches.keys().then(keyList =>
       Promise.all(
