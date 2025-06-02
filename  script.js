@@ -15,21 +15,39 @@ function showScreen(screenId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     showScreen('start-screen');
-
-    // Attach click handler to start button safely
-    const newRecipeBtn = document.getElementById('new-recipe-btn');
-    if (newRecipeBtn) {
-        newRecipeBtn.addEventListener('click', () => {
-            showScreen('home-screen');
-        });
-    }
-
-    // Your confirm/edit recipe logic (keep as-is, or extract it out of this block if you want to use inline onclicks)
 });
 
 // HOME SCREEN
 
-    
+    // Recipe Name
+        // Wait until the DOM is ready before attaching event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmBtn = document.getElementById('confirm-btn');
+            const editBtn = document.getElementById('edit-btn');
+            const recipeNameInput = document.getElementById('recipe-name');
+
+        function confirmRecipeName() {
+          // Disable the input field and hide the confirm button
+          recipeNameInput.disabled = true;
+          confirmBtn.style.display = 'none';
+
+          // Show the edit button
+          editBtn.style.display = 'inline-block';
+        }
+
+        function editRecipeName() {
+          // Enable the input field for editing
+          recipeNameInput.disabled = false;
+
+          // Show the confirm button and hide the edit button
+          confirmBtn.style.display = 'inline-block';
+          editBtn.style.display = 'none';
+        }
+
+        // Attach the functions to the buttons
+        confirmBtn.addEventListener('click', confirmRecipeName);
+        editBtn.addEventListener('click', editRecipeName);
+      });
 
 
     // Accordion toggle
@@ -56,19 +74,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Upload Image Button
     document.getElementById('preview-image').addEventListener('change', function (event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
 
-    reader.onload = function (e) {
-      const img = document.getElementById('image-preview');
-      img.src = e.target.result;
-      img.style.display = 'block'; // show image only after upload
-    };
+        reader.onload = function (e) {
+          const img = document.getElementById('image-preview');
+          img.src = e.target.result;
+          img.style.display = 'block'; // show the image
+        };
 
-    reader.readAsDataURL(file);
-  }
-});
+        reader.readAsDataURL(file);
+      }
+    });
+
+    //Image Once UPLOADED
+    document.getElementById('preview-image').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.getElementById('image-preview');
+          img.src = e.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
 
 
 // INGREDIENTS SCREEN
