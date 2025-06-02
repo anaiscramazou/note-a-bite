@@ -171,7 +171,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('preview-image')?.addEventListener('change', handleImageUpload);
   document.getElementById('confirm-btn')?.addEventListener('click', confirmRecipeName);
   document.getElementById('edit-btn')?.addEventListener('click', editRecipeName);
-  document.getElementById('start-screen')?.querySelector('button')?.addEventListener('click', () => showScreen('home-screen'));
+
+  // Bind “New Recipe” by its ID instead of querying any button under #start-screen
+  document.getElementById('start-new-recipe')?.addEventListener('click', () => {
+    showScreen('home-screen');
+  });
 });
 
 // Service Worker
