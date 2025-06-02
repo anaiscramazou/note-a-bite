@@ -1,7 +1,13 @@
-// Show a specific screen by ID
+// ---------------------------------------------------
+// script.js
+// ---------------------------------------------------
+
+// Show exactly one screen (by ID), hiding all others
 function showScreen(screenId) {
   const screens = document.querySelectorAll(".screen");
-  screens.forEach(screen => screen.style.display = "none");
+  screens.forEach(screen => {
+    screen.style.display = "none";
+  });
 
   const target = document.getElementById(screenId);
   if (target) {
@@ -11,15 +17,17 @@ function showScreen(screenId) {
   }
 }
 
-// State
+// -------------- State Arrays --------------
 const ingredients = [];
 const steps = [];
 
-// Confirm and edit recipe name
+// -------------- Home Screen / Recipe Name --------------
 function confirmRecipeName() {
   const input = document.getElementById('recipe-name');
   const confirmBtn = document.getElementById('confirm-btn');
   const editBtn = document.getElementById('edit-btn');
+
+  if (!input || !confirmBtn || !editBtn) return;
 
   input.disabled = true;
   confirmBtn.style.display = 'none';
@@ -31,31 +39,36 @@ function editRecipeName() {
   const confirmBtn = document.getElementById('confirm-btn');
   const editBtn = document.getElementById('edit-btn');
 
+  if (!input || !confirmBtn || !editBtn) return;
+
   input.disabled = false;
   confirmBtn.style.display = 'inline-block';
   editBtn.style.display = 'none';
 }
 
-// Accordion toggle (for Home screen counters)
+// -------------- Accordion (Home Screen counters) --------------
 function toggleAccordion(id, clickedElement) {
   const content = document.getElementById(id);
   const chevron = clickedElement.querySelector('.chevron h2');
-  const isExpanded = content.style.display === 'block';
+  if (!content) return;
 
+  const isExpanded = content.style.display === 'block';
   content.style.display = isExpanded ? 'none' : 'block';
-  if (chevron) chevron.classList.toggle('rotated', !isExpanded);
+
+  if (chevron) {
+    chevron.classList.toggle('rotated', !isExpanded);
+  }
 }
 
-// Ingredient list management
+// -------------- Ingredients Screen Logic --------------
 function updateIngredientList() {
   const list = document.getElementById("ingredient-inputs");
   const count = document.querySelector(".ingredient-count");
-  if (list) {
-    list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
-  }
-  if (count) {
-    count.textContent = ingredients.length;
-  }
+  if (!list || !count) return;
+
+  // Show each ingredient in the accordion list on Home screen
+  list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
+  count.textContent = ingredients.length;
 }
 
 function addIngredient() {
@@ -86,6 +99,7 @@ function addIngredient() {
     updateIngredientList();
   });
 
+  // Pressing Enter while focused on an ingredient input adds a new one
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -101,18 +115,16 @@ function addIngredient() {
   updateIngredientList();
 }
 
-// Steps list management
+// -------------- Steps Screen Logic --------------
 function updateStepsList() {
   const list = document.getElementById("step-inputs");
   const count = document.querySelector(".steps-count");
-  if (list) {
-    list.innerHTML = steps
-      .map((item, index) => `<li>Step ${index + 1}: ${item}</li>`)
-      .join("");
-  }
-  if (count) {
-    count.textContent = steps.length;
-  }
+  if (!list || !count) return;
+
+  list.innerHTML = steps
+    .map((item, index) => `<li>Step ${index + 1}: ${item}</li>`)
+    .join("");
+  count.textContent = steps.length;
 }
 
 function addStep() {
@@ -151,7 +163,7 @@ function addStep() {
   updateStepsList();
 }
 
-// Navigation functions
+// -------------- Navigation Helpers --------------
 function navigateToIngredients() {
   showScreen('ingredients-screen');
 }
@@ -166,52 +178,73 @@ function goHome() {
   updateStepsList();
 }
 
-// Image preview
+// -------------- Image Preview --------------
 function handleImageUpload(event) {
   const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const img = document.getElementById('image-preview');
-      if (img) {
-        img.src = e.target.result;
-        img.style.display = 'block';
-      }
-    };
-    reader.readAsDataURL(file);
-  }
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const img = document.getElementById('image-preview');
+    if (img) {
+      img.src = e.target.result;
+      img.style.display = 'block'; // ensure it’s visible once loaded
+    }
+  };
+  reader.readAsDataURL(file);
 }
 
-// Generate recipe (placeholder)
+// -------------- Generate Recipe (placeholder) --------------
 function generateRecipe() {
   alert("✨ Recipe generated!");
 }
 
-// Initial event bindings
+// ---------------------------------------------------
+// Bind everything once DOM is ready
+// ---------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // Always start on the start screen
+  // 1) Show the Start screen first
   showScreen('start-screen');
 
-  // Image upload listener
-  document.getElementById('preview-image')?.addEventListener('change', handleImageUpload);
+  // 2) “New Recipe” button on the Start screen
+  const newBtn = document.getElementById('start-new-recipe');
+  if (newBtn) {
+    newBtn.addEventListener('click', () => {
+      showScreen('home-screen');
+    });
+  } else {
+    console.warn("Could not find #start-new-recipe button");
+  }
 
-  // Confirm/Edit recipe name
-  document.getElementById('confirm-btn')?.addEventListener('click', confirmRecipeName);
-  document.getElementById('edit-btn')?.addEventListener('click', editRecipeName);
+  // 3) Home screen: Confirm / Edit recipe name
+  const confirmBtn = document.getElementById('confirm-btn');
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', confirmRecipeName);
+  }
+  const editBtn = document.getElementById('edit-btn');
+  if (editBtn) {
+    editBtn.addEventListener('click', editRecipeName);
+  }
 
-  // “New Recipe” button on the Start screen
-  document.getElementById('start-new-recipe')?.addEventListener('click', () => {
-    showScreen('home-screen');
-  });
+  // 4) Home screen: Image upload listener
+  const imageInput = document.getElementById('preview-image');
+  if (imageInput) {
+    imageInput.addEventListener('change', handleImageUpload);
+  }
 
-  // Note: The following navigation buttons still rely on inline onclicks in your HTML:
-  //   - In Home screen: <h2 onclick="navigateToIngredients()"> and <h2 onclick="navigateToSteps()">
-  //   - In Ingredients screen: <button onclick="goHome()">Back to Home</button>
-  //   - In Steps screen: <button onclick="goHome()">Back</button>
-  //   - In Share screen: <button onclick="showScreen('home-screen')">New Recipe</button>
+  // 5) Ingredients screen: “+ Add Ingredient” is inline onclick="addIngredient()"
+  //    Steps screen: “+ Add Step” is inline onclick="addStep()"
+  //    Home screen: Ingredients section-title calls navigateToIngredients() inline
+
+  // 6) Back buttons on Ingredients & Steps screens all call goHome() inline
+  //    (no need to re-bind here if they use onclick="goHome()")
+
+  // 7) Share screen’s “New Recipe” uses onclick="showScreen('home-screen')", so that works as-is.
 });
 
-// Service Worker registration
+// ---------------------------------------------------
+// Service Worker registration (unchanged)
+// ---------------------------------------------------
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
