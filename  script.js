@@ -15,7 +15,6 @@ function showScreen(screenId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     showScreen('start-screen');
-});
 
     // Attach click handler to start button safely
     const newRecipeBtn = document.getElementById('new-recipe-btn');
