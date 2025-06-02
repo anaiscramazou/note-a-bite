@@ -1,4 +1,6 @@
-const cacheName = 'recipe-gen-v1';
+// Change this whenever you make a new release
+const cacheName = 'recipe-gen-v2';
+
 const assets = [
   './',
   './index.html',
@@ -11,9 +13,22 @@ const assets = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(cacheName).then(cache => {
-      return cache.addAll(assets);
-    })
+    caches.open(cacheName).then(cache => cache.addAll(assets))
+  );
+});
+
+// Clean up old caches on activation
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keyList =>
+      Promise.all(
+        keyList.map(key => {
+          if (key !== cacheName) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
 });
 
