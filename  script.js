@@ -15,6 +15,7 @@ function showScreen(screenId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     showScreen('start-screen');
+});
 
     // Attach click handler to start button safely
     const newRecipeBtn = document.getElementById('new-recipe-btn');
@@ -29,35 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // HOME SCREEN
 
-    // Recipe Name
-        // Wait until the DOM is ready before attaching event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            const confirmBtn = document.getElementById('confirm-btn');
-            const editBtn = document.getElementById('edit-btn');
-            const recipeNameInput = document.getElementById('recipe-name');
-
-        function confirmRecipeName() {
-          // Disable the input field and hide the confirm button
-          recipeNameInput.disabled = true;
-          confirmBtn.style.display = 'none';
-
-          // Show the edit button
-          editBtn.style.display = 'inline-block';
-        }
-
-        function editRecipeName() {
-          // Enable the input field for editing
-          recipeNameInput.disabled = false;
-
-          // Show the confirm button and hide the edit button
-          confirmBtn.style.display = 'inline-block';
-          editBtn.style.display = 'none';
-        }
-
-        // Attach the functions to the buttons
-        confirmBtn.addEventListener('click', confirmRecipeName);
-        editBtn.addEventListener('click', editRecipeName);
-      });
+    
 
 
     // Accordion toggle
