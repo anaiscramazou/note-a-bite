@@ -203,41 +203,35 @@ function generateRecipe() {
 }
 
 // ---------------------------------------------------
-// Bind everything once the DOM is ready
+// Bind everything once the DOM is fully loaded
 // ---------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // 1) Always start by showing the Start screen
-  showScreen('start-screen');
+  console.log("🚀 script.js loaded and DOM is ready");
 
-  // 2) “New Recipe” button on the Start screen
+  // Show the start screen by default
+  window.showScreen('start-screen');
+
+  // Bind “New Recipe” button
   const newBtn = document.getElementById('start-new-recipe');
+  console.log("🔍 Found start-new-recipe button:", newBtn);
   if (newBtn) {
-    console.log("🚀 Found start-new-recipe button, binding click listener");
     newBtn.addEventListener('click', () => {
-      console.log("🖱 start-new-recipe clicked—showing home-screen");
-      showScreen('home-screen');
+      console.log("🖱 'New Recipe' clicked—switching to home-screen");
+      window.showScreen('home-screen');
     });
   } else {
-    console.warn("Could not find #start-new-recipe button");
+    console.warn("❌ Could not find #start-new-recipe button");
   }
 
-  // 3) Home screen: Confirm / Edit recipe name
+  // Bind Confirm/Edit buttons
   const confirmBtn = document.getElementById('confirm-btn');
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', confirmRecipeName);
-  }
+  if (confirmBtn) confirmBtn.addEventListener('click', window.confirmRecipeName);
   const editBtn = document.getElementById('edit-btn');
-  if (editBtn) {
-    editBtn.addEventListener('click', editRecipeName);
-  }
+  if (editBtn) editBtn.addEventListener('click', window.editRecipeName);
 
-  // 4) Home screen: Image upload listener
+  // Bind image upload listener
   const imageInput = document.getElementById('preview-image');
-  if (imageInput) {
-    imageInput.addEventListener('change', handleImageUpload);
-  }
-
-  // (Remaining “Add Ingredient”, “Add Step”, “Back” and “Ingredients/Steps” are inline in HTML)
+  if (imageInput) imageInput.addEventListener('change', window.handleImageUpload);
 });
 
 // ---------------------------------------------------
