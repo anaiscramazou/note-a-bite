@@ -65,7 +65,9 @@ function updateIngredientList() {
 
   const nonEmpty = ingredients.filter(item => item.trim() !== '');
 
-  list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
+  list.innerHTML = ingredients
+    .map(item => `<li>${item}</li>`)
+    .join("");
   count.textContent = ingredients.length;
 }
 
