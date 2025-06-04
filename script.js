@@ -129,51 +129,73 @@ function addIngredient() {
 
 // -------------- Steps Screen Logic --------------
 function updateStepsList() {
-  const list = document.getElementById("step-inputs");
-  const count = document.querySelector(".steps-count");
-  if (!list || !count) return;
+  const listContainer = document.getElementById("step-inputs");  // Home screen’s <ul id="step-inputs">
+  const countLabel    = document.querySelector(".steps-count");  // Home screen’s counter
+  if (!listContainer || !countLabel) return;
 
-  list.innerHTML = steps
-    .map((item, index) => `<li>Step ${index + 1}: ${item}</li>`)
+  // 1) Filter out blank entries from steps[]
+  const nonEmpty = steps.filter(item => item.trim() !== "");
+
+  // 2) Render only non-empty strings as <li>…</li>
+  listContainer.innerHTML = nonEmpty
+    .map((text, idx) => `<li>Step ${idx + 1}: ${text}</li>`)
     .join("");
-  count.textContent = steps.length;
+
+  // 3) Update the Steps counter with how many real steps exist
+  countLabel.textContent = nonEmpty.length;
 }
 
+
 function addStep() {
-  const list = document.getElementById('steps-list');
+  const list = document.getElementById("steps-list");  // The container on the Steps screen
   if (!list) return;
 
-  const div = document.createElement('div');
-  div.className = 'steps-item';
+  const wrapper = document.createElement("div");
+  wrapper.className = "steps-item";
 
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = 'e.g. Stir-fry garlic until golden...';
-  input.className = 'step-input';
+  const input = document.createElement("input");
+  input.type = "text";
+  input.placeholder = "e.g. Stir-fry garlic until golden...";
+  input.className = "step-input";
 
-  const removeBtn = document.createElement('button');
-  removeBtn.className = 'remove-btn';
-  removeBtn.textContent = '✕';
-  removeBtn.onclick = function () {
-    const index = Array.from(list.children).indexOf(div);
-    if (index > -1) {
-      steps.splice(index, 1);
-      div.remove();
+  const removeBtn = document.createElement("button");
+  removeBtn.className = "remove-btn";
+  removeBtn.textContent = "✕";
+  removeBtn.onclick = function() {
+    // Find this wrapper’s index within #steps-list
+    const idx = Array.from(list.children).indexOf(wrapper);
+    if (idx > -1) {
+      // Remove that entry from the array & DOM, then re-render
+      steps.splice(idx, 1);
+      wrapper.remove();
       updateStepsList();
     }
   };
 
-  input.addEventListener('input', () => {
-    const index = Array.from(list.children).indexOf(div);
-    if (index > -1) {
-      steps[index] = input.value;
+  input.addEventListener("input", () => {
+    const idx = Array.from(list.children).indexOf(wrapper);
+    if (idx > -1) {
+      steps[idx] = input.value;
       updateStepsList();
     }
   });
 
-  div.appendChild(input);
-  div.appendChild(removeBtn);
-  list.appendChild(div);
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addStep();
+      // Optionally, focus the newly created input:
+      const lastInput = document.querySelector(
+        "#steps-list .steps-item:last-child input"
+      );
+      if (lastInput) lastInput.focus();
+    }
+  });
+
+
+  wrapper.appendChild(input);
+  wrapper.appendChild(removeBtn);
+  list.appendChild(wrapper);
 
   steps.push('');
   updateStepsList();
