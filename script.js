@@ -63,6 +63,8 @@ function updateIngredientList() {
   const count = document.querySelector(".ingredient-count");
   if (!list || !count) return;
 
+  const nonEmpty = ingredients.filter(item => item.trim() !== '');
+
   list.innerHTML = ingredients.map(item => `<li>${item}</li>`).join("");
   count.textContent = ingredients.length;
 }
