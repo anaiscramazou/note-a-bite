@@ -111,6 +111,11 @@ function addIngredient() {
     if (e.key === 'Enter') {
       e.preventDefault();
       addIngredient();
+      // Focus the newly added input
+      const lastInput = document.querySelector(
+        "#ingredients-list .ingredient-item:last-child input"
+      );
+      if (lastInput) lastInput.focus();
     }
   });
 
