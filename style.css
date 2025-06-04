@@ -606,16 +606,3 @@ body {
     align-self: stretch;
   }
 
-  .step-input {
-  width: 100%;
-  min-height: 2.5rem;
-  line-height: 1.4;
-  padding: 0.5rem;
-  border: 1px solid #CBA623;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 1rem;
-  resize: none;
-  overflow: hidden;
-  box-sizing: border-box;
-}
