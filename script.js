@@ -63,12 +63,16 @@ function updateIngredientList() {
   const count = document.querySelector(".ingredient-count");
   if (!list || !count) return;
 
+  // First, filter out any empty‐string entries
   const nonEmpty = ingredients.filter(item => item.trim() !== '');
 
-  list.innerHTML = ingredients
+  // Render ONLY the nonEmpty items
+  list.innerHTML = nonEmpty
     .map(item => `<li>${item}</li>`)
     .join("");
-  count.textContent = ingredients.length;
+
+  // Show the count of nonEmpty items (not the total array length)
+  count.textContent = nonEmpty.length;
 }
 
 function addIngredient() {
