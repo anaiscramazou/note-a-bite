@@ -57,6 +57,8 @@ body {
     display: none;
     align-items: center;
     width: 430px;
+    height:932px;
+    background-image: url('images/BG.png')
   }
     
   #start-screen {
