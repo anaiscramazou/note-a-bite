@@ -1,4 +1,4 @@
-body {
+body, main {
     display: flex;
     width: 680px;
     height: 800px;
