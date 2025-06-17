@@ -471,7 +471,7 @@ body {
   
   .ingredients-list li,
   .steps-list li {
-    color: #000000; /* Or any visible color */
+    color: #7c7c7c; /* Or any visible color */
     font-size: 1rem;
     display: list-item;
     visibility: visible;
