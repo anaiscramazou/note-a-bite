@@ -1,7 +1,7 @@
 body {
     display: flex;
-    width: 680px;
-    height: 800px;
+    width: 430px;
+    height: 932px;
     align-self: stretch;
     padding: 16px;
     flex-direction: column;
@@ -56,7 +56,7 @@ body {
   .screen {
     display: none;
     align-items: center;
-    width: 680px;
+    width: 430px;
   }
     
   #start-screen {
@@ -229,7 +229,7 @@ body {
 
   #ingredients-card {
     display: flex;
-    width: 680px;
+    width: 400px;
     height: 600px;
     padding: 24px 40px;
     flex-direction: column;
@@ -276,7 +276,7 @@ body {
   
   #steps-card {
     display: flex;
-    width: 680px;
+    width: 400px;
     height: 600px;
     padding: 24px 40px;
     flex-direction: column;
@@ -304,8 +304,8 @@ body {
 
 body {
     display: flex;
-    width: 680px;
-    height: 800px;
+    width: 430px;
+    height: 932px;
     align-self: stretch;
     padding: 16px;
     flex-direction: column;
@@ -533,7 +533,7 @@ body {
 
   #ingredients-card {
     display: flex;
-    width: 680px;
+    width: 400px;
     height: 600px;
     padding: 24px 40px;
     flex-direction: column;
@@ -580,7 +580,7 @@ body {
   
   #steps-card {
     display: flex;
-    width: 680px;
+    width: 400px;
     height: 600px;
     padding: 24px 40px;
     flex-direction: column;
