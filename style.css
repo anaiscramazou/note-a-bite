@@ -74,6 +74,7 @@ body {
     
   #start-screen {
     display: block; /* initial screen shown */
+    width: 100%;
   }
   
   .start-cover {
